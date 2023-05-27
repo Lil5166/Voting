@@ -1,5 +1,6 @@
 package com.example.voting.controllers;
 
+import com.example.voting.models.LoginFormResponse;
 import com.example.voting.models.RegisterFormResponse;
 import com.example.voting.models.Role;
 import com.example.voting.models.User;
@@ -14,24 +15,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthController {
-
+    private final LoginFormResponse loginFormResponse;
     private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
     private final RegisterFormResponse registerFormResponse;
 
     @Autowired
-    public AuthController(PasswordEncoder passwordEncoder, UserRepository userRepository, RegisterFormResponse registerFormResponse) {
+    public AuthController(LoginFormResponse loginFormResponse, PasswordEncoder passwordEncoder, UserRepository userRepository, RegisterFormResponse registerFormResponse) {
+        this.loginFormResponse = loginFormResponse;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.registerFormResponse = registerFormResponse;
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("loginFormResponse", loginFormResponse);
         return "registration&login/login";
     }
-
     @GetMapping("/registration")
     public String registration(Model model){
         model.addAttribute("registerFormResponse", registerFormResponse);

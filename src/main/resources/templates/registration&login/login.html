@@ -66,16 +66,16 @@
     </style>
 </head>
 <body>
-<form th:action="@{/login}">
+<form method="POST" th:object="${loginFormResponse}" th:action="@{/login}">
     <div class="container">
         <h1 style="margin-left: 34%">Login</h1>
         <hr>
 
         <label><b>Username</b></label>
-        <input type="text" placeholder="Enter username" name="username" required>
+        <input th:field="*{username}" type="text" placeholder="Enter username" name="username" required>
 
         <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+        <input th:field="*{password}" type="password" placeholder="Enter Password" name="password" required>
         <hr>
         <button type="submit" class="registerbtn">Login</button>
     </div>
