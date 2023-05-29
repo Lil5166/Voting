@@ -3,6 +3,7 @@ package com.example.voting.config;
 import com.example.voting.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -31,18 +32,14 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/login/**", "/registration/**").permitAll()
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                         .successHandler((request, response, authentication) -> {
-                            if (authentication.getAuthorities()
-                                    .contains(new SimpleGrantedAuthority(Role.OWNER.toString()))) {
-                                response.sendRedirect("/adminConsole");
-                            } else {
                                 response.sendRedirect("/");
-                            }
                         })
                 )
                 .logout((logout) -> logout

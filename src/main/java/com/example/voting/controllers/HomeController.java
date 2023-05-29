@@ -16,6 +16,6 @@ public class HomeController {
     @GetMapping("/")
     public String voting(Model model) {
         model.addAttribute("voting", votingService.list());
-        return "index";
+        return "voting/index";
     }
 }
