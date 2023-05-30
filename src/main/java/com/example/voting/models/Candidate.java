@@ -14,7 +14,6 @@ import lombok.Setter;
 public class Candidate {
     private String name;
     private String surname;
-    private String description;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

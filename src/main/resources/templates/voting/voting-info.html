@@ -19,11 +19,13 @@
 
     <form method="post" th:action="@{/}">
         <b th:each="candidate : ${candidates}">
-            <p th:text="${candidate.name}"></p>
+            <div th:if="${candidate.isActive() == true}">
+            <p th:text="${candidate.name + ' ' + candidate.surname}"></p>
             <input type="radio" name="selectedCandidate" th:value="${candidate.id}"/>
         </b><br>
         <button type="submit">Submit</button>
     </form>
+            </div>
     <h2>Список претендентів:</h2>
     <table class="table">
         <thead>
@@ -36,7 +38,7 @@
         <tbody>
         <tr th:each="candidate : ${candidates}">
             <td th:if="${candidate.isActive() == false}" th:text="${candidate.name}"></td>
-            <td th:if="${candidate.isActive() == false}" th:text="${candidate.description}"></td>
+            <td th:if="${candidate.isActive() == false}" th:text="${candidate.surname}"></td>
             <td th:if="${candidate.isActive() == false}">
                 <form method="post" th:action="@{/voting/{votingId}/choose/{candidateId}(votingId=${voting.id}, candidateId = ${candidate.id})}">
                     <button type="submit">Додати до голосування</button>
@@ -45,22 +47,22 @@
         </tr>
         </tbody>
     </table>
-<div th:if="${isOwner == true}">
-    <h2>Додати нового претендента:</h2>
-    <form th:object="${newCandidate}" th:action="@{/voting/{votingId}/candidates/create(votingId=${voting.id})}" method="post">
-        <div class="mb-3">
-            <label for="name" class="form-label">Ім'я:</label>
-            <input type="text" id="name" name="name" class="form-control" th:field="*{name}"/>
-        </div>
+    <div th:if="${isOwner == true}">
+        <h2>Додати нового претендента:</h2>
+        <form th:object="${newCandidate}" th:action="@{/voting/{votingId}/candidates/create(votingId=${voting.id})}" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Ім'я:</label>
+                <input type="text" id="name" name="name" class="form-control" th:field="*{name}"/>
+            </div>
 
-        <div class="mb-3">
-            <label for="description" class="form-label">Опис:</label>
-            <input type="text" id="description" name="description" class="form-control" th:field="*{description}"/>
-        </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Опис:</label>
+                <input type="text" id="description" name="description" class="form-control" th:field="*{surname}"/>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Додати претендента</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-primary">Додати претендента</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
