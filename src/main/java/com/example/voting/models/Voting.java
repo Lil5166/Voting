@@ -3,10 +3,11 @@ package com.example.voting.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity(name = "voting")
-@Getter
 @Data
-@Setter
+@Builder
 @Table
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class Voting {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // id опитування
     private Long count;
-    private Long ownerId; // id користувача, який створив опитування
-    private Long applicantId;// id претиндента
-
+    private String ownerUsername; // id користувача, який створив опитування
+    @OneToMany(mappedBy = "voting")
+    private List<Candidate> candidateList;// id претиндентів
 }
