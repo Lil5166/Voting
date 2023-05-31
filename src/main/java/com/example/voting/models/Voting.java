@@ -17,8 +17,15 @@ public class Voting {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id; // id опитування
-    private Long count;
-    private String ownerUsername; // username користувача, який створив опитування
-    @OneToMany(mappedBy = "voting")
-    private List<Candidate> candidateList;// id претиндентів
+    private int voteCount;
+    private String ownerUsername;
+    private boolean isActive;
+    public int getVoteCount() {
+        return voteCount;
+    }
+
+    public void setVoteCount(int voteCount) {
+        this.voteCount = voteCount;
+    }
 }
+

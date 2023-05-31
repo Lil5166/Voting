@@ -1,5 +1,6 @@
 package com.example.voting.services;
 
+import com.example.voting.models.Candidate;
 import com.example.voting.models.Voting;
 import com.example.voting.models.VotingResponse;
 import com.example.voting.repository.VotingRepository;
@@ -25,4 +26,15 @@ public class VotingService {
         return votingRepository.findAll();
     }
 
+    public void changeVotingStatusFalse(Long votingId) {
+        Voting voting = votingRepository.findById(votingId).orElse(null);
+        voting.setActive(false);
+        votingRepository.save(voting);
+    }
+
+    public void changeVotingStatusTrue(Long votingId) {
+        Voting voting = votingRepository.findById(votingId).orElse(null);
+        voting.setActive(true);
+        votingRepository.save(voting);
+    }
 }

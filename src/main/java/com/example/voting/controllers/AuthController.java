@@ -5,10 +5,12 @@ import com.example.voting.models.RegisterFormResponse;
 import com.example.voting.models.Role;
 import com.example.voting.models.User;
 import com.example.voting.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +43,19 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String register(@ModelAttribute RegisterFormResponse registerFormResponse, Model model) {
+    public String register(@ModelAttribute @Valid RegisterFormResponse registerFormResponse, Errors errors, Model model) {
+        if (!registerFormResponse.getPassword().equals(registerFormResponse.getConfirmPassword())) {
+            model.addAttribute("passwordsNotEqual", "Passwords are not equal");
+        }
+        if (userRepository.findByUsername(registerFormResponse.getUsername()).orElse(null) != null) {
+            model.addAttribute("usernameIsTaken", "Username is already taken");
+        }
+        if (errors.hasErrors()
+                || model.containsAttribute("passwordsNotEqual")
+                || model.containsAttribute("usernameIsTaken")
+        ) {
+            return "registration&login/registration";
+        }
         var user = User.builder()
                 .username(registerFormResponse.getUsername())
                 .password(passwordEncoder.encode(registerFormResponse.getPassword()))

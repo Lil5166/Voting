@@ -23,7 +23,7 @@
         <tr th:each="voting : ${votingList}">
             <td th:text="${voting.title}"></td>
             <td th:text="${voting.description}"></td>
-            <td th:text="${voting.count}"></td>
+            <td th:text="${voting.voteCount}"></td>
             <td>
                 <a th:href="@{/voting/{votingId}(votingId=${voting.id})}">Деталі</a>
             </td>
