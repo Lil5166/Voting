@@ -15,4 +15,7 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     @Query("SELECT c FROM Candidate c WHERE c.voting = :voting")
     List<Candidate> findByVoting(@Param("voting") Voting voting);
+
+    @Query("SELECT c FROM Candidate c WHERE c.voting.id = :votingId")
+    List<Candidate> findCandidatesByVotingId(@Param("votingId") Long votingId);
 }

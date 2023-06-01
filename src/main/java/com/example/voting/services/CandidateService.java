@@ -17,17 +17,6 @@ public class CandidateService {
         this.candidatesByVotingId = new HashMap<>();
     }
 
-    public void addCandidateToVoting(Voting voting, Candidate candidate) {
-        Long votingId = voting.getId();
-        if (!candidatesByVotingId.containsKey(votingId)) {
-            candidatesByVotingId.put(votingId, new ArrayList<>());
-        }
-
-        List<Candidate> candidates = candidatesByVotingId.get(votingId);
-        candidates.add(candidate);
-        candidatesByVotingId.put(votingId, candidates);
-    }
-
     public List<Candidate> getCandidatesByVotingId(Long votingId) {
         return candidatesByVotingId.getOrDefault(votingId, Collections.emptyList());
     }

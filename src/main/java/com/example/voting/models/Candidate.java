@@ -17,7 +17,7 @@ public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "voting_id")
     private Voting voting;
     private boolean isActive;

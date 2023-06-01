@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -76,7 +77,7 @@ public class VotingController {
         if (username.equals(voting.getOwnerUsername())) {
             model.addAttribute("isOwner", true);
         } else {
-          model.addAttribute("isOwner", false);
+            model.addAttribute("isOwner", false);
         }
         boolean hasVoted = voteRepository.existsByUsernameAndVotingId(username, votingId);
         model.addAttribute("hasVoted", hasVoted);
@@ -147,6 +148,24 @@ public class VotingController {
         return "redirect:/voting/{votingId}";
     }
 
+    @GetMapping("/{votingId}/results")
+    public String showResults(@PathVariable("votingId") Long votingId, Model model) {
+        Voting voting = votingService.getVotingById(votingId);
+
+        List<Candidate> candidates = voting.getCandidates();
+
+        Map<Long, Integer> votes = votingService.getVotesByVotingId(votingId);
+
+        int totalCount = voteRepository.countByVotingId(votingId);
+
+        model.addAttribute("voting", voting);
+        model.addAttribute("candidates", candidates);
+        model.addAttribute("votes", votes);
+        model.addAttribute("totalCount", totalCount);
+
+        return "voting/voting-result";
+
+    }
 }
 
 

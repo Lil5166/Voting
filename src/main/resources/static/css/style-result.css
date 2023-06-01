@@ -1,0 +1,55 @@
+/* Додаткові стилі */
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.percentage {
+    font-weight: bold;
+    text-align: center;
+}
+
+.header-row {
+    font-weight: bold;
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-row span {
+    text-align: center;
+    flex: 1;
+}
+
+.votes-count {
+    text-align: center;
+    flex: 1;
+}

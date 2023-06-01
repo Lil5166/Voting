@@ -20,6 +20,8 @@ public class Voting {
     private int voteCount;
     private String ownerUsername;
     private boolean isActive;
+    @OneToMany(mappedBy = "voting")
+    private List<Candidate> candidates;
     public int getVoteCount() {
         return voteCount;
     }

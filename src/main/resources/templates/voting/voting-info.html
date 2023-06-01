@@ -17,6 +17,8 @@
     <h2>Опис голосування:</h2>
     <p th:text="${voting.description}"></p>
 
+    <h2>Кандидати:</h2>
+
     <form method="post" th:action="@{/voting/{votingId}/vote(votingId=${voting.id})}">
         <div th:each="candidate : ${candidates}">
             <div th:if="${candidate.isActive() == true}">
@@ -27,8 +29,11 @@
             </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary" th:if="${!hasVoted && voting.isActive}">Submit</button>
+        <button type="submit" class="btn btn-primary" th:if="${!hasVoted && voting.isActive}">Проголосувати</button>
         <p class="text-success" th:if="${hasVoted}">Ви вже проголосували :)</p>
+    </form>
+    <form th:action="@{/voting/{votingId}/results(votingId=${voting.id})}" th:if="${hasVoted}">
+        <button type="submit" class="btn btn-success">Переглянути результати голосування</button>
     </form>
     <button onclick="copyUrl()" class="btn btn-secondary">Скопіювати URL-адресу голосування</button>
     <div th:if="${isOwner == true}">
