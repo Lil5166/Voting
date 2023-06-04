@@ -25,7 +25,6 @@ import java.util.Optional;
 public class VotingController {
 
     private final VotingService votingService;
-    private final UserRepository userRepository;
     private final VotingRepository votingRepository;
     private final VoteRepository voteRepository;
 
@@ -33,9 +32,8 @@ public class VotingController {
     private final CandidateService candidateService;
 
 
-    public VotingController(VotingService votingService, UserRepository userRepository, CandidateService candidateService, VotingRepository votingRepository, VoteRepository voteRepository, CandidateRepository candidateRepository, CandidateService candidateService1) {
+    public VotingController(VotingService votingService, VotingRepository votingRepository, VoteRepository voteRepository, CandidateRepository candidateRepository, CandidateService candidateService1) {
         this.votingService = votingService;
-        this.userRepository = userRepository;
         this.votingRepository = votingRepository;
         this.voteRepository = voteRepository;
         this.candidateRepository = candidateRepository;

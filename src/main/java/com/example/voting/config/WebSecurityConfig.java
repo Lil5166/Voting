@@ -23,7 +23,7 @@ public class WebSecurityConfig {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(@Qualifier("userDetailsDBService") UserDetailsService userDetailsService) {
+    public WebSecurityConfig(@Qualifier("userDetailsService") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

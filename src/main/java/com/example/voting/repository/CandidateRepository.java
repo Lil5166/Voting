@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
-    Optional<Candidate> findById(Long id);
-    Candidate findByName(String name);
-
     @Query("SELECT c FROM Candidate c WHERE c.voting = :voting")
     List<Candidate> findByVoting(@Param("voting") Voting voting);
 

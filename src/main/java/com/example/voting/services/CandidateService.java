@@ -9,17 +9,12 @@ import java.util.*;
 
 @Service
 public class CandidateService {
-    private final Map<Long, List<Candidate>> candidatesByVotingId;
     private final CandidateRepository candidateRepository;
 
     public CandidateService(CandidateRepository candidateRepository) {
         this.candidateRepository = candidateRepository;
-        this.candidatesByVotingId = new HashMap<>();
     }
 
-    public List<Candidate> getCandidatesByVotingId(Long votingId) {
-        return candidatesByVotingId.getOrDefault(votingId, Collections.emptyList());
-    }
     public List<Candidate> getCandidatesByVoting(Voting voting) {
         return candidateRepository.findByVoting(voting);
     }
